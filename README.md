@@ -1,7 +1,7 @@
 # PassItOn_IOHack
-Team 1 "CoolBytes" submission for the IOHack Hackathon
-This web application uses PHP, JavaScript, HTML, and CSS.
-For our demo, we've been hosting our PHP server locally with IIS.
+Team 1 "CoolBytes" submission for the IOHack Hackathon\
+This web application uses PHP, JavaScript, HTML, and CSS.\
+For our demo, we've been hosting our PHP server locally with IIS.\
 PHP version: 7.3.13
 MySQL version: 5.1
 Our database has four tables:
