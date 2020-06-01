@@ -31,34 +31,51 @@
 </nav>
     <?php
         session_start(); // Access session variables for login
+        //Make sure they're logged in, otherwise redirect.
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-            $curLink = mysqli_connect("localhost", "root", "PASSWORD", "passiton_db") or die(printf(mysqli_error())); // Connect to database server(localhost) with username and password.
+            $curLink = mysqli_connect("localhost", "root", "SOMEPASSWORD", "passiton_db") or die(printf(mysqli_error())); // Connect to database server(localhost) with username and password.
             $search = $curLink->query("SELECT * FROM users WHERE id='".$_SESSION['id']."'") or die(mysql_error()); 
             while($row = mysqli_fetch_assoc($search)) {
                 $email = $row['email'];
-            }
+            }   // Get their email to display it on the page
             $searchP = $curLink->query("SELECT * FROM profiles WHERE id='".$_SESSION['id']."'") or die(mysql_error());
+            // Get their other information from a query
             while($row = mysqli_fetch_assoc($searchP)) {
                 $subjects = $row['subjects'];
                 $name = $row['name'];
+                $grade = $row['grade'];
             }
         }
         else
         {
             header("Location: login.php"); // Redirect to the login page
         }
+        // If they decided to change their display name
         if(isset($_POST['cName']) && !empty($_POST['cName']))
         {
+            // Prevent SQL injection
             $name = $curLink->real_escape_string($_POST['cName']);
+            // Update the user's row in the database with the new name
             $curLink->query("UPDATE profiles SET name = '$name' WHERE id = '".$_SESSION['id']."'") or die(mysqli_error($curLink));
             $_SESSION['name'] = $name;
         }
+        // If they decided to change their grade
+        if(isset($_POST['grade']) && !empty($_POST['grade']))
+        {
+            $grade = $_POST['grade'];
+            // Update their grade in the database
+            $curLink->query("UPDATE profiles SET grade = '$grade' WHERE id = '".$_SESSION['id']."'") or die(mysqli_error($curLink));
+        }
+        // If they decided to update the subjects they can teach
         if(isset($_POST['subSelect']) && !empty($_POST['subSelect']))
         {
+            // Start with an empty string
             $subjects = '';
+            // For each selected option, concatenate the digit of the option to $subjects
             foreach ($_POST['subSelect'] as $selectedOption)
                 $subjects .= $selectedOption;
             $_SESSION['subjects'] = $subjects;
+            // Update the database with this string
             $curLink->query("UPDATE profiles SET subjects = '".$subjects."' WHERE id = '".$_SESSION['id']."'") or die(mysqli_error($curLink));
         }
     ?>
@@ -66,7 +83,7 @@
         <br><br>
         <div class="container">
             <div class="row">
-                <!-- left column -->
+                <!-- left column TODO: functional profile picture selection -->
                 <div class="col-md-3">
                     <div class="text-center">
                         <img src="//placehold.it/100" class="avatar img-circle" alt="avatar" />
@@ -98,15 +115,16 @@
                             <div class="col-lg-8">
                                 <div class="ui-select">
                                     <select name="grade" id="user_time_zone" class="form-control">
-                                        <option value="8">8</option>
-                                        <option value="9">9</option>
-                                        <option value="10">10</option>
-                                        <option value="11">11</option>
-                                        <option value="12">12</option>
+                                        <option value="8" <?php if (strpos($grade, '8') !== false) { echo ' selected'; }?>>8</option>
+                                        <option value="9" <?php if (strpos($grade, '9') !== false) { echo ' selected'; }?>>9</option>
+                                        <option value="10" <?php if (strpos($grade, '10') !== false) { echo ' selected'; }?>>10</option>
+                                        <option value="11" <?php if (strpos($grade, '11') !== false) { echo ' selected'; }?>>11</option>
+                                        <option value="12" <?php if (strpos($grade, '12') !== false) { echo ' selected'; }?>>12</option>
                                     </select>
                                 </div>
                             </div>
                         </div>
+                        <!-- Not sure if this is useful, but maybe for the future when you can add friends and see if their time is reasonable -->
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Time Zone:</label>
                             <div class="col-lg-8">

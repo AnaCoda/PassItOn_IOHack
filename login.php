@@ -1,3 +1,4 @@
+<!-- This is the login page -->
 <!DOCTYPE html>
 <head>
 <script src="javascript/PushNotificationEx.js"></script>
@@ -41,11 +42,11 @@
         if(isset($_POST['uname']) && !empty($_POST['uname']) AND isset($_POST['pass']) && !empty($_POST['pass']))
         {
             // Connect to the SQL database (for the prototype, it's being hosted locally)
-            $curLink = mysqli_connect("localhost", "root", "PASSWORD", "passiton_db") or die(printf(mysqli_error())); // Connect to database server(localhost) with username and password.
+            $curLink = mysqli_connect("localhost", "root", "SOMEPASSWORD", "passiton_db") or die(printf(mysqli_error())); // Connect to database server(localhost) with username and password.
             $username = $curLink->real_escape_string($_POST['uname']); // Set variable for the username (escape string to prevent injection)
             $password = $curLink->real_escape_string(md5($_POST['pass']));  // Set variable for the password and hash it
             $search = $curLink->query("SELECT * FROM users WHERE username='".$username."' AND password='".$password."'") or die(mysql_error()); 
-            $match  = mysqli_num_rows($search);
+            $match  = mysqli_num_rows($search); // Query user information so we can put them in session vars
             if($match > 0){
                 $msg = 'Login Complete! Thanks';
                 $_SESSION['loggedin'] = true;       // Set the session variables

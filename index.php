@@ -1,3 +1,4 @@
+<!-- This is the registration page -->
 <!DOCTYPE html>
 <head>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -59,7 +60,7 @@
                 else
                 {
                     // Connect to the SQL database (for the prototype, it's being hosted locally)
-                    $curLink = mysqli_connect("localhost", "root", "PASSWORD", "passiton_db") or die(printf(mysqli_error())); // Connect to database server(localhost) with username and password.
+                    $curLink = mysqli_connect("localhost", "root", "SOMEPASSWORD", "passiton_db") or die(printf(mysqli_error())); // Connect to database server(localhost) with username and password.
                     
                     // Prevent SQL injection
                     $name = $curLink->real_escape_string($name);
@@ -76,6 +77,7 @@
                     while($row = mysqli_fetch_assoc($search)) {
                         $id = $row['id'];
                     }
+                    // Insert their initial profile into the database with some preset values so they can edit it later when they login
                     $curLink->query("INSERT INTO profiles (id, grade, name, subjects) VALUES(
                         '$id', 
                         8, 

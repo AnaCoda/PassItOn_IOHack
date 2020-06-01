@@ -1,3 +1,4 @@
+<!-- Form for the user to create a new help request -->
 <!DOCTYPE html>
 <head>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -42,17 +43,29 @@
          
         <!-- start php code -->
         <?php
- 
-        if(isset($_POST['name']) && !empty($_POST['name']) AND isset($_POST['email']) && !empty($_POST['email']))
+        session_start();
+        // Check that they're logged in, otherwise redirect
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true)
         {
-            // Form Submitted
-            $name = $_POST['name'];     // Turn our post into a local variable 
-            $email = $_POST['email'];   // Will use Escape_string to prevent SQL injection when SQL is implemented
-            $pass = $_POST['pass'];     
-            $pass2 = $_POST['pass2'];
-
+            if(isset($_POST['subject'])) // The user submitted the form
+            {
+                $curLink = mysqli_connect("localhost", "root", "SOMEPASSWORD", "passiton_db") or die(printf(mysqli_error())); // Connect to database server(localhost) with username and password.
+                
+                // Form Submitted
+                $subject = $_POST['subject'];     // Turn our posts into a local variable 
+                $time = $_POST['time'];
+                echo $subject;
+                // Insert a new request into the database and include the user who made it and the options they selected
+                $curLink->query("INSERT INTO requests (user_id, subject, estim_time) VALUES(
+                    '".$_SESSION['id']."', 
+                    '$subject', 
+                    '$time')") or die(mysqli_error($curLink));
+            }
         }
-                 
+        else
+        {
+            header("Location: login.php"); // Redirect to the login page
+        }
         ?>
         <!-- stop php code -->
      
@@ -63,11 +76,11 @@
         <div class="col dform-group justify-content-center align-items-center container">
         
         <!-- start sign up form -->  
-        <form class="form-horizontal " role="form" method="post" action="" >
+        <form class="form-horizontal" role="form" method="POST" action="" >
                         <div class="form-group">
                             <label class="col-lg-3 control-label">Choose the subject you would like help in:</label>
                             <div class="col-lg-8">
-                                <select class="selectpicker w-auto" data-live-search="true">
+                                <select class="selectpicker w-auto" data-live-search="true" name="subject">
                                     <optgroup label="Math">
                                         <option value="1">Trigonometry</option>
                                         <option value="2">Calculus</option>
@@ -93,7 +106,7 @@
                         <div class="form-group">
                             <label class="col-lg-3 control-label">How long do you expect the lesson to take?</label>
                             <div class="col-lg-8">
-                                <select class="selectpicker w-auto">
+                                <select class="selectpicker w-auto" name="time">
                                     <option value="1">A few minutes</option>
                                     <option value="2">Less than an hour</option>
                                     <option value="3">Around an hour</option>
@@ -117,5 +130,5 @@
     </div>
     <!-- end wrap div -->
 </body>
-<script src="javascript/RequestHelp.js"></script>
+<script src="javascript/requestHelp.js"></script>
 </html>
