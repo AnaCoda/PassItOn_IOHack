@@ -1,53 +1,53 @@
 # PassItOn_IOHack
 Team 1 "CoolBytes" submission for the IOHack Hackathon\
 This web application uses PHP, JavaScript, HTML, and CSS.\
-For our demo, we've been hosting our PHP server locally with IIS.\
-PHP version: 7.3.13
-MySQL version: 5.1
-Our database has four tables:
-    users
-    profiles
-    subjects
-    requests
+For our demo, we've been hosting our PHP server locally with IIS.\ \
+PHP version: 7.3.13\
+MySQL version: 5.1\ \
+Our database has four tables:\
+    users\
+    profiles\
+    subjects\
+    requests\ \
 
-Here are the structures of the tables
-Users:
-+----------+-------------+------+-----+---------+----------------+
-| Field    | Type        | Null | Key | Default | Extra          |
-+----------+-------------+------+-----+---------+----------------+
-| id       | int(10)     | NO   | PRI | NULL    | auto_increment |
-| username | varchar(32) | NO   |     | NULL    |                |
-| password | varchar(32) | NO   |     | NULL    |                |
-| email    | text        | NO   |     | NULL    |                |
-+----------+-------------+------+-----+---------+----------------+
+Here are the structures of the tables \
+Users:\
++----------+-------------+------+-----+---------+----------------+\
+| Field    | Type        | Null | Key | Default | Extra          |\
++----------+-------------+------+-----+---------+----------------+\
+| id       | int(10)     | NO   | PRI | NULL    | auto_increment |\
+| username | varchar(32) | NO   |     | NULL    |                |\
+| password | varchar(32) | NO   |     | NULL    |                |\
+| email    | text        | NO   |     | NULL    |                |\
++----------+-------------+------+-----+---------+----------------+\ \
 
-Profiles:
-+----------+-------------+------+-----+---------+-------+
-| Field    | Type        | Null | Key | Default | Extra |
-+----------+-------------+------+-----+---------+-------+
-| id       | int(10)     | NO   | MUL | NULL    |       |
-| grade    | int(3)      | NO   |     | NULL    |       |
-| name     | varchar(32) | NO   |     | NULL    |       |
-| subjects | varchar(40) | NO   |     | NULL    |       |
-+----------+-------------+------+-----+---------+-------+
+Profiles:\
++----------+-------------+------+-----+---------+-------+\
+| Field    | Type        | Null | Key | Default | Extra |\
++----------+-------------+------+-----+---------+-------+\
+| id       | int(10)     | NO   | MUL | NULL    |       |\
+| grade    | int(3)      | NO   |     | NULL    |       |\
+| name     | varchar(32) | NO   |     | NULL    |       |\
+| subjects | varchar(40) | NO   |     | NULL    |       |\
++----------+-------------+------+-----+---------+-------+\ \
 
-Subjects:
-+----------+-------------+------+-----+---------+----------------+
-| Field    | Type        | Null | Key | Default | Extra          |
-+----------+-------------+------+-----+---------+----------------+
-| sub_id   | int(10)     | NO   | PRI | NULL    | auto_increment |
-| sub_name | varchar(32) | NO   |     | NULL    |                |
-+----------+-------------+------+-----+---------+----------------+
+Subjects:\
++----------+-------------+------+-----+---------+----------------+\
+| Field    | Type        | Null | Key | Default | Extra          |\
++----------+-------------+------+-----+---------+----------------+\
+| sub_id   | int(10)     | NO   | PRI | NULL    | auto_increment |\
+| sub_name | varchar(32) | NO   |     | NULL    |                |\
++----------+-------------+------+-----+---------+----------------+\ \
 
-Requests:
-+------------+---------+------+-----+---------+----------------+
-| Field      | Type    | Null | Key | Default | Extra          |
-+------------+---------+------+-----+---------+----------------+
-| user_id    | int(10) | NO   |     | NULL    |                |
-| request_id | int(10) | NO   | PRI | NULL    | auto_increment |
-| subject    | int(3)  | NO   |     | NULL    |                |
-| estim_time | int(2)  | NO   |     | NULL    |                |
-+------------+---------+------+-----+---------+----------------+
+Requests:\
++------------+---------+------+-----+---------+----------------+\
+| Field      | Type    | Null | Key | Default | Extra          |\
++------------+---------+------+-----+---------+----------------+\
+| user_id    | int(10) | NO   |     | NULL    |                |\
+| request_id | int(10) | NO   | PRI | NULL    | auto_increment |\
+| subject    | int(3)  | NO   |     | NULL    |                |\
+| estim_time | int(2)  | NO   |     | NULL    |                |\
++------------+---------+------+-----+---------+----------------+\
 
 
 
