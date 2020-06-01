@@ -11,15 +11,15 @@ Our database has four tables:<br/>
     requests<br/> <br/>
 
 Here are the structures of the tables <br/>
-Users:<br/>
-+----------+-------------+------+-----+---------+----------------+<br/>
-| Field    | Type        | Null | Key | Default | Extra          |<br/>
-+----------+-------------+------+-----+---------+----------------+<br/>
-| id       | int(10)     | NO   | PRI | NULL    | auto_increment |<br/>
-| username | varchar(32) | NO   |     | NULL    |                |<br/>
-| password | varchar(32) | NO   |     | NULL    |                |<br/>
-| email    | text        | NO   |     | NULL    |                |<br/>
-+----------+-------------+------+-----+---------+----------------+<br/> <br/>
+Users:<br/>```
++----------+-------------+------+-----+---------+----------------+
+| Field    | Type        | Null | Key | Default | Extra          |
++----------+-------------+------+-----+---------+----------------+
+| id       | int(10)     | NO   | PRI | NULL    | auto_increment |
+| username | varchar(32) | NO   |     | NULL    |                |
+| password | varchar(32) | NO   |     | NULL    |                |
+| email    | text        | NO   |     | NULL    |                |
++----------+-------------+------+-----+---------+----------------+ ```
 
 Profiles:<br/>
 +----------+-------------+------+-----+---------+-------+<br/>
